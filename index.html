@@ -10,6 +10,9 @@
       background-color: #1a1a1a;
       color: #f7f7f7;
       line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      text-align: center; /* Center all text */
     }
 
     header {
@@ -17,7 +20,7 @@
       color: white;
       padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Center the header content */
       align-items: center;
       flex-wrap: wrap;
       border-bottom: 3px solid #4a3572;
@@ -26,6 +29,7 @@
     header .logo h1 {
       font-size: 1.8em;
       font-weight: 700;
+      margin: 0;
     }
 
     nav ul {
@@ -34,6 +38,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
+      padding: 0;
     }
 
     nav ul li a {
@@ -51,16 +56,10 @@
       padding: 40px 15px;
       margin: 20px 0;
       border-bottom: 2px solid #6a4c9c;
-      text-align: center;
     }
 
-    .section h2 {
+    .section h2, .section h3 {
       font-size: 2em;
-      color: #6a4c9c;
-      margin-bottom: 15px;
-    }
-	.section h3 {
-      font-size: 1.5em;
       color: #6a4c9c;
       margin-bottom: 15px;
     }
@@ -119,32 +118,19 @@
       background-color: #4a3572;
     }
 
-    /* Centering the Services section text */
-    #services {
-      text-align: center;
-    }
-
-    #fav-people-title {
-      text-align: center;
-    }
-
-    #fav-people-content {
-      text-align: center;
-    }
-
     @media (max-width: 768px) {
       header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
       }
 
       nav ul {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
       }
 
-      .section h2 {
+      .section h2, .section h3 {
         font-size: 1.5em;
       }
 
@@ -155,6 +141,7 @@
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">
       <h1>NFKC's Website!</h1>
@@ -164,7 +151,7 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About This Site</a></li>
         <li><a href="#services">Inspiration</a></li>
-		<li><a href="#games">Games/Apps</a></li>
+        <li><a href="#games">Games/Apps</a></li>
       </ul>
     </nav>
   </header>
@@ -176,28 +163,28 @@
 
   <section id="about" class="section">
     <h2>About This Site!</h2>
-    <p>This site was made to work and run on a nintendo 3DS, so far its running pretty well.</p>
+    <p>This site was made to work and run on a Nintendo 3DS, so far it's running pretty well.</p>
   </section>
 
   <section id="services" class="section">
     <div class="dropdown">
-      <h3 id="fav-people-title">People that inspired me to make this site</h3>
-      <div id="fav-people-content" class="dropdown-content">
+      <h3>People that inspired me to make this site</h3>
+      <div class="dropdown-content">
         <ul>
           <p>Hazel</p>
         </ul>
       </div>
     </div>
-  
   </section>
-   <section id="games" class="section">
+
+  <section id="games" class="section">
     <div class="dropdown">
-      <h2 id="fav-people-title">Games/Apps</h2>
-      <div id="fav-people-content" class="dropdown-content">
+      <h2>Games/Apps</h2>
+      <div class="dropdown-content">
         <ul>
           <p>12/16/24</p>
-		  <p>apps = "3dsbank, homebrew launcher,universal updater, ftpd, anemone, checkpoint, fbi, hshop, nimbus, bootntr, flipnote studio, netpass, themely, 3dsident, fourthtube, 3dbroswer"</p>
-		  <p>games = "minecraft new nintendo 3ds edition, the legend of zelda ocarina of time 3d, tomodachi life, super smash bros for the nintendo 3ds, mariokart 7, cookie clicker, twilight menu++, animal crossing new leaf, new super mario bros.2, classicube, "3d"paint"</p>
+          <p>Apps = "3dsbank, homebrew launcher, universal updater, ftpd, anemone, checkpoint, fbi, hshop, nimbus, bootntr, flipnote studio, netpass, themely, 3dsident, fourthtube, 3dbroswer"</p>
+          <p>Games = "Minecraft New Nintendo 3DS Edition, The Legend of Zelda Ocarina of Time 3D, Tomodachi Life, Super Smash Bros for the Nintendo 3DS, Mario Kart 7, Cookie Clicker, Twilight Menu++, Animal Crossing New Leaf, New Super Mario Bros. 2, Classicube, '3D' Paint"</p>
         </ul>
       </div>
     </div>
@@ -206,6 +193,6 @@
   <footer>
     <p>&copy; Made with ChatGPT and some help from me!</p>
   </footer>
-  </script>
+
 </body>
 </html>

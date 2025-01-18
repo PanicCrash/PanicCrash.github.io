@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iP0DFun</title>
 
-  <!-- Open Graph Meta Tags      <meta property="og:image" content="https://files.catbox.moe/guzeqz.webp"> -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="iP0DFun">
   <meta property="og:description" content="click to open and see a new world of possibilitys or just relax">
   <meta property="og:image" content="https://files.catbox.moe/guzeqz.webp">
@@ -100,94 +100,6 @@
     #audio-player {
       display: none;
     }
-
-    /* Volume control */
-    .volume-control-container {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      font-size: 1.2rem;
-      color: #fff;
-      z-index: 1001;
-      text-align: left;
-      padding: 10px;
-    }
-
-    .volume-control-label {
-      font-size: 1rem;
-      color: #c7a0ff;
-      margin-bottom: 5px;
-    }
-
-    .volume-slider {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      width: 120px;
-      height: 2px;
-      background-color: #555;
-      outline: none;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 5px;
-    }
-
-    .volume-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #c7a0ff;
-      cursor: pointer;
-      margin-top: -8px;
-    }
-
-    .volume-slider::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: #c7a0ff;
-      cursor: pointer;
-      margin-top: -8px;
-    }
-
-    /* Responsive Design for Mobile */
-    @media (max-width: 600px) {
-      .overlay {
-        font-size: 1.5rem; /* Smaller text for smaller screens */
-      }
-
-      .template h1 {
-        font-size: 1.5rem; /* Adjust heading size */
-      }
-
-      .template p {
-        font-size: 1rem; /* Adjust paragraph size */
-      }
-
-      .volume-control-container {
-        bottom: 40px;
-        right: 10px;
-        font-size: 1rem;
-        padding: 8px;
-      }
-
-      .volume-slider {
-        width: 100px; /* Make the slider shorter on smaller screens */
-      }
-
-      .volume-slider::-webkit-slider-thumb {
-        width: 16px; /* Make thumb smaller */
-        height: 16px;
-      }
-
-      .volume-slider::-moz-range-thumb {
-        width: 16px; /* Make thumb smaller */
-        height: 16px;
-      }
-    }
-
   </style>
   <script>
     function showContent() {
@@ -207,15 +119,6 @@
         alert("Please enable sound in your browser.");
       });
     }
-
-    function adjustVolume(event) {
-      const audio = document.querySelector("#audio-player");
-      let volume = event.target.value;
-      if (volume < 0) volume = 0;
-      if (volume > 100) volume = 100;
-      audio.volume = volume / 100;
-      document.querySelector(".volume-value").textContent = `Volume: ${volume}%`;
-    }
   </script>
 </head>
 <body>
@@ -231,11 +134,5 @@
   <audio id="audio-player" src="audios/music/canyoublameme.wav" loop>
     Your browser does not support the audio element.
   </audio>
-
-  <div class="volume-control-container">
-    <div class="volume-control-label">Volume Control</div>
-    <input type="range" min="0" max="100" value="100" class="volume-slider" oninput="adjustVolume(event)" />
-    <div class="volume-value">Volume: 100%</div>
-  </div>
 </body>
 </html>

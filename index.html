@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>iP0DFun</title>
   <style>
+    /* General Reset and Body */
     body {
       margin: 0;
       padding: 0;
@@ -16,15 +17,16 @@
       align-items: center;
       flex-direction: column;
       position: relative;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
     }
 
-    /* full-screen overlay */
+    /* Ensure overlay and content are centered on all screen sizes */
     .overlay {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
       display: flex;
       justify-content: center;
@@ -36,49 +38,47 @@
       cursor: pointer;
       z-index: 1000;
       opacity: 1;
-      transition: opacity 1s ease-out; /* Add fade-out transition */
+      transition: opacity 1s ease-out;
     }
 
-    /* content show when clicked */
     .hidden-content {
       display: none;
       position: relative;
       z-index: 10;
       opacity: 0;
-      transition: opacity 1s ease-in; /* Add fade-in transition */
-      width: 100%; /* Ensure full width */
-      height: 100%; /* Ensure full height */
+      transition: opacity 1s ease-in;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /* stuff in center */
     .template {
-      background-color: #292929; /* Slightly lighter gray for contrast */
-      border: 2px solid #815ae5; /* Chill purple border */
+      background-color: #292929;
+      border: 2px solid #815ae5;
       border-radius: 15px;
       padding: 20px 30px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       text-align: center;
-      max-width: 500px;
-      width: 90%;
+      max-width: 90%;
+      width: 500px;
     }
 
     .template h1 {
       font-size: 2rem;
-      color: #c7a0ff; /* Chill purple color */
+      color: #c7a0ff;
       margin-bottom: 15px;
-      font-weight: bold; /* Make the text bold */
+      font-weight: bold;
       animation: glow 2s infinite alternate;
     }
 
     .template p {
       font-size: 1.2rem;
-      color: #aaa; /* Muted gray text for a relaxed feel */
+      color: #aaa;
     }
 
-    /* glowing header */
+    /* Glowing animation */
     @keyframes glow {
       0% {
         text-shadow: 0 0 5px #c7a0ff, 0 0 10px #c7a0ff, 0 0 15px #c7a0ff, 0 0 20px #815ae5, 0 0 25px #815ae5;
@@ -88,38 +88,146 @@
       }
     }
 
+    /* Hide audio player */
+    #audio-player {
+      display: none;
+    }
+
+    /* Volume control */
+    .volume-control-container {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      font-size: 1.2rem;
+      color: #fff;
+      z-index: 1001;
+      text-align: left;
+      padding: 10px;
+    }
+
+    .volume-control-label {
+      font-size: 1rem;
+      color: #c7a0ff;
+      margin-bottom: 5px;
+    }
+
+    .volume-slider {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 120px;
+      height: 2px;
+      background-color: #555;
+      outline: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #c7a0ff;
+      cursor: pointer;
+      margin-top: -8px;
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #c7a0ff;
+      cursor: pointer;
+      margin-top: -8px;
+    }
+
+    /* Responsive Design for Mobile */
+    @media (max-width: 600px) {
+      .overlay {
+        font-size: 1.5rem; /* Smaller text for smaller screens */
+      }
+
+      .template h1 {
+        font-size: 1.5rem; /* Adjust heading size */
+      }
+
+      .template p {
+        font-size: 1rem; /* Adjust paragraph size */
+      }
+
+      .volume-control-container {
+        bottom: 40px;
+        right: 10px;
+        font-size: 1rem;
+        padding: 8px;
+      }
+
+      .volume-slider {
+        width: 100px; /* Make the slider shorter on smaller screens */
+      }
+
+      .volume-slider::-webkit-slider-thumb {
+        width: 16px; /* Make thumb smaller */
+        height: 16px;
+      }
+
+      .volume-slider::-moz-range-thumb {
+        width: 16px; /* Make thumb smaller */
+        height: 16px;
+      }
+    }
+
   </style>
   <script>
     function showContent() {
-      // fade out the overlay
       const overlay = document.querySelector('.overlay');
       overlay.style.opacity = '0';
-
-      // after fade out is complete  hide the overlay and show the content
       setTimeout(() => {
         overlay.style.display = 'none';
-        
         const content = document.querySelector('.hidden-content');
-        
-        // set content to display block and trigger opacity transition
-        content.style.display = 'flex'; // make it visible 
+        content.style.display = 'flex';
         setTimeout(() => {
-          content.style.opacity = '1'; // trigger the fade in
-        }, 50); // add a small delay before starting the fade in
-      }, 1000); // wait for 1 second for the fade out to complete
+          content.style.opacity = '1';
+        }, 50);
+      }, 1000);
+      const audio = document.querySelector("#audio-player");
+      audio.play().catch(function(error) {
+        console.error("Error playing audio:", error);
+        alert("Please enable sound in your browser.");
+      });
+    }
+
+    function adjustVolume(event) {
+      const audio = document.querySelector("#audio-player");
+      let volume = event.target.value;
+      if (volume < 0) volume = 0;
+      if (volume > 100) volume = 100;
+      audio.volume = volume / 100;
+      document.querySelector(".volume-value").textContent = `Volume: ${volume}%`;
     }
   </script>
 </head>
 <body>
-  <!-- full screen overlay that says "click to open" -->
   <div class="overlay" onclick="showContent()">click to open</div>
 
-  <!-- hidden site content -->
   <div class="hidden-content">
     <div class="template">
       <h1>Welcome to the Chill Zone</h1>
       <p>Relax and enjoy the vibes.</p>
     </div>
+  </div>
+
+  <audio id="audio-player" src="audios/music/canyoublameme.wav" loop>
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="volume-control-container">
+    <div class="volume-control-label">Volume Control</div>
+    <input type="range" min="0" max="100" value="100" class="volume-slider" oninput="adjustVolume(event)" />
+    <div class="volume-value">Volume: 100%</div>
   </div>
 </body>
 </html>
